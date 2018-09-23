@@ -2,6 +2,7 @@ import Home from '@/views/Home.vue'
 export default [
   {
     path: '/',
+    alias: 'home_page',
     name: 'home',
     component: Home
   },
@@ -12,5 +13,37 @@ export default [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue')
+  },
+  {
+    path: '/argu/:name',
+    component: () => import('@/views/argu.vue')
+  },
+  // 嵌套路由
+  {
+    path: '/parent',
+    component: () => import('@/views/parent.vue'),
+    // children属性是一个数组，里面包含嵌套在parent组件里面的子集页面
+    children: [
+      {
+        // 子集的path里面是不需要斜线的,只有父级的path才需要写 加 "/"。作为嵌套路由，他会自动补全子集里面的 "/" 所以path的值直接就是 'child'
+        path: 'child',
+        component: () => import('@/views/child.vue')
+      }
+    ]
+  },
+  // 命名视图
+  {
+    path: '/named_view',
+    // 这个是 components 之前的都是 component 没有 s。 加上 s 之后说明我们要加载多个组件
+    components: {
+      // 如果在之前的 app.vue 中的 router-view 没有命名的话，那么就加载 default 对应的组件的
+      default: () => import('@/views/child.vue'),
+      email: () => import('@/views/email.vue'),
+      tel: () => import('@/views/tel.vue')
+    }
+  },
+  {
+    path: '/main',
+    redirect: to => '/'
   }
 ]
