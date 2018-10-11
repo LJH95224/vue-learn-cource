@@ -4,7 +4,10 @@ export default [
     path: '/',
     alias: 'home_page',
     name: 'home',
-    component: Home
+    component: Home,
+    props: route => ({
+      food: route.query.food
+    })
   },
   {
     path: '/about',
@@ -12,11 +15,15 @@ export default [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue')
+    component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue'),
+    props: {
+      // food: 'banana'
+    }
   },
   {
     path: '/argu/:name',
-    component: () => import('@/views/argu.vue')
+    component: () => import('@/views/argu.vue'),
+    props: true
   },
   // 嵌套路由
   {
@@ -45,5 +52,10 @@ export default [
   {
     path: '/main',
     redirect: to => '/'
+  },
+  {
+    // path 为 * ，代表匹配任何的路径
+    path: '*',
+    component: () => import('@/views/error_404.vue')
   }
 ]
