@@ -19,3 +19,7 @@ npm run build
 ```
 npm run lint
 ```
+
+### 课程笔记在CourseNotes文件夹中
+笔记是自己记录的笔记，如果有错误，请帮忙指正一下，谢谢!
+
