@@ -7,7 +7,22 @@ export default [
     component: Home,
     props: route => ({
       food: route.query.food
-    })
+    }),
+    beforeEnter: (to, from, next) => {
+      // 在里面我们可以做一些对逻辑的处理，
+      if (from.name === 'login') {
+        alert('这是从登陆页来的')
+      } else {
+        alert('这不是从登录页来的')
+      }
+      
+      next()
+    }
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/login.vue')
   },
   {
     path: '/about',
