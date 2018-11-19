@@ -22,6 +22,19 @@ export default {
       default: 'pear'
     }
   },
+  beforeRouteEnter (to, from, next) {
+    console.log(to.name)
+    next()
+  },
+  beforeRouteLeave (to, from, next) {
+    const leave = confirm('您确定要离开吗？')
+    if (leave) {
+      next()
+    } else {
+      // next里面加上false，表示不能离开此页面
+      next(false)
+    }
+  },
   methods: {
     handleClick (type) {
       // 我们使用编程时导航的时候，需要用到一个路由实例。 路由实例就是 this.$router

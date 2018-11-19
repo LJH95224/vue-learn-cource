@@ -11,6 +11,10 @@ export default {
       // 要是没由传入那么就会显示默认的
       default: 'lison'
     }
+  },
+  beforeRouteUpdate (to, from, next) {
+    console.log(1, to, from)
+    next()
   }
 }
 </script>
