@@ -1,12 +1,19 @@
 <template>
   <div>
+    <p>vuex的双向绑定</p>
+    <!-- 方法一 -->
+    <!-- <a-input :value="stateValue" @input="handleStateValueChange"/> -->
+    <!-- 方法二 -->
+      <a-input v-model="stateValue"/> 
+     <p>{{ stateValue }}</p>
+
     <p>这是store页面</p>
     <!-- v-model 是双向绑定，  -->
     <!-- <a-input v-model="inputValue"></a-input> -->
     <!-- 上面那种写法是下面这种写法的简写方法 -->
     <!-- <a-input :value="inputValue" @input="handleInput"></a-input> -->
 
-    <a-input @input="handleInput" />
+    <!-- <a-input @input="handleInput" /> -->
     <p>{{ inputValue }} -> lastLetter is {{ inputVlaueLastLetter }}</p>
     <!-- <a-show :content="inputValue" /> -->
     <p>appName: {{ appName }}</p>
@@ -54,9 +61,19 @@ export default {
       appName: state => state.appName,
       userName: state => state.user.userName,
       appVersion: state => state.appVersion,
-      todoList: state => state.user.todo ? state.user.todo.todoList : []
+      todoList: state => state.user.todo ? state.user.todo.todoList : [],
+      // stateValue: state => state.stateValue
     }),
-
+    stateValue: {
+      // 当你读取的时候会调用这个方法
+      get () {
+        return this.$store.state.stateValue
+      },
+      // 当你给stateValue赋值的时候，会调用这个方法
+      set (value) {
+        this.SET_STATE_VALUE(value)
+      }
+    },
     // 使用createNamespacedHelpers的时候
     // ...mapState({
     //   userName: state => state.userName
@@ -84,7 +101,8 @@ export default {
   methods: {
     ...mapMutations([
       'SET_USER_NAME',
-      'SET_APP_NAME'
+      'SET_APP_NAME',
+      'SET_STATE_VALUE'
     ]),
     ...mapActions([
       'updateAppName'
@@ -115,9 +133,12 @@ export default {
       this.updateAppName()
     },
     changeUserName () {
-      // this.SET_USER_NAME('vue-course')
+      this.SET_USER_NAME('vue-course')
       // 除了使用mapActions，我们还可以使用 store实例上的一个方法触发一个actions
       // this.$store.dispatch('updateAppName', '123')
+
+      // 错误的方法
+      // this.$store.state.user.userName = 'haha'
     },
     regisetModule () {
       // 动态注册模块，给user模块添加一个todo的子模块
@@ -129,6 +150,9 @@ export default {
           ]
         }
       })
+    },
+    handleStateValueChange (val) {
+      this.SET_STATE_VALUE(val)
     }
   }
 }
