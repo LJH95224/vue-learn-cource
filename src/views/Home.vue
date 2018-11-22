@@ -4,20 +4,27 @@
     <button @click="handleClick('back')">返回上一页</button>
     <button @click="handleClick('push')">跳转到parent</button>
     <button @click="handleClick('replace')">替换到parent</button>
-    <button @click="getInfo">请求数据</button>
+    <button @click="getInfo" :style="{ background: bgColor}">请求数据</button>
+    <img :src="url"/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
-import axios from 'axiox'
+import axios from 'axios'
 import { getUserInfo } from '@/api/user'
 
 export default {
   name: 'home',
   components: {
     HelloWorld
+  },
+  data () {
+    return {
+      url: '',
+      bgColor: ''
+    }
   },
   props: {
     food: {
@@ -87,6 +94,8 @@ export default {
       // 
       getUserInfo({ userId: 21 }).then(res => {
         console.log('res:', res)
+        this.url = res.data.img
+        this.bgColor = res.data.color
       })
     }
   }

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { baseURL } from '@config'
+import { baseURL } from '@/config'
 
 // baseUrl = baseURL 这种写法是es6里面的写法，相当于
 // baseUrl = baseUrl || baseURL
