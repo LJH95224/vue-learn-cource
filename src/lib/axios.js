@@ -51,8 +51,8 @@ class HttpRequest {
   }
   request (options) {
     const instance = axios.create()
-    // 使用Object.assign方法将(this.getInsideConfig(). options) 这两个对象合并在一个对象里面，如果两个里面有相同的key，后面的key对应的值会覆盖前面的key对应的值
-    options = Object.assign(this.getInsideConfig(). options)
+    // 使用Object.assign方法将(this.getInsideConfig(), options) 这两个对象合并在一个对象里面，如果两个里面有相同的key，后面的key对应的值会覆盖前面的key对应的值
+    options = Object.assign(this.getInsideConfig(), options)
     this.interceptors(instance, options.url) 
     return instance(options)
   }
