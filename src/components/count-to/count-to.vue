@@ -8,7 +8,7 @@
 <script>
 import CountUp from 'countup'
 // 引入less文件
-import './count-to '
+import './count-to'
 export default {
   name: 'CountTo',
   computed: {

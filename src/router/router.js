@@ -45,8 +45,13 @@ export default [
   },
   {
     path: "/count-to",
-    name: 'count_to',
+    name: "count_to",
     component: () => import("@/views/count-to.vue")
+  },
+  {
+    path: "/split-pane",
+    name: "split-pane",
+    component: () => import("@/views/split-pane.vue")
   },
   // 嵌套路由
   {
