@@ -43,6 +43,11 @@ export default [
     component: () => import("@/views/argu.vue"),
     props: true
   },
+  {
+    path: "/count-to",
+    name: 'count_to',
+    component: () => import("@/views/count-to.vue")
+  },
   // 嵌套路由
   {
     path: "/parent",
@@ -72,8 +77,8 @@ export default [
     redirect: to => "/"
   },
   {
-    path: '/store',
-    component: () => import('@/views/store.vue')
+    path: "/store",
+    component: () => import("@/views/store.vue")
   },
   {
     // path 为 * ，代表匹配任何的路径
